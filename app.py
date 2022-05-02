@@ -17,9 +17,7 @@ def hello():
         return("Updated!")
     
     if request.method == 'GET':
-        file_html_data = open('./data_html.txt', "r")
-        data_html = file_html_data.read()
-        return data_html
+        return Fat Bitches
 
 
 if __name__ == "__main__":
