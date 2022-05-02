@@ -5,6 +5,8 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def hello():
     if request.method == "POST":
+        data_source = request.form.get('url')
+        return f'Received data from {data_source}'
 #         file_html_data = open('./data_html.txt', "w")
 #         # file_simple_data = open('./simple_data.txt', "w")
 #         data_html = request.form.get('data_html')
@@ -17,6 +19,7 @@ def hello():
         return("Updated!")
     
     if request.method == 'GET':
+        data_source = request.form.get('url')
         return 'Holy Bitches'
 
 
