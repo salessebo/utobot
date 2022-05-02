@@ -16,7 +16,7 @@ def hello():
 #         file_html_data.close()
 #         # file_simple_data.close()
 #         print("Updated!")
-        return("Updated!")
+#         return("Updated!")
     
     if request.method == 'GET':
         data_source = request.form.get('url')
