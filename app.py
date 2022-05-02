@@ -19,7 +19,6 @@ def hello():
 #         return("Updated!")
     
     if request.method == 'GET':
-        data_source = request.form.get('url')
         return 'Holy Bitches'
 
 
