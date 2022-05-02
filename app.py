@@ -17,7 +17,7 @@ def hello():
         return("Updated!")
     
     if request.method == 'GET':
-        return 'Hello lil Bitches'
+        return 'Hello fat Bitches'
 
 
 if __name__ == "__main__":
