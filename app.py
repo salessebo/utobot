@@ -16,7 +16,7 @@ def hello():
             html_data = request.form.get('html_data')
             parse_throne(html_data)
             
-        return res2
+        return res
 
     
     if request.method == 'GET':
