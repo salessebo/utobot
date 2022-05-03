@@ -12,7 +12,8 @@ def hello():
             data_file.write(res)
         with open('data_html.txt', "w") as data_file:
             res2 = data_file.read()
-        return res
+        print(res2)
+        return res2
 #         file_html_data = open('./data_html.txt', "w")
 #         # file_simple_data = open('./simple_data.txt', "w")
 #         data_html = request.form.get('data_html')
