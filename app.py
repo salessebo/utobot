@@ -13,8 +13,8 @@ def hello():
         res = f'Received {prv} data from {url}...'
         print(res)
         if 'throne' in url:
-            html_data = request.form.get('html_data')
-            parse_throne(html_data)
+            data_html = request.form.get('data_html')
+            parse_throne(data_html)
             
         return res
 
