@@ -10,6 +10,8 @@ def hello():
         res = f'Received {prv} data from {url}...'
         with open('data_html.txt', "w") as data_file:
             data_file.write(res)
+        with open('data_html.txt', "w") as data_file:
+            res2 = data_file.read()
         return res
 #         file_html_data = open('./data_html.txt', "w")
 #         # file_simple_data = open('./simple_data.txt', "w")
