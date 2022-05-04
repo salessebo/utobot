@@ -1,6 +1,7 @@
 from cgitb import html
 from flask import Flask, request
 from datetime import datetime
+import pandas as pd
 # from bs4 import BeautifulSoup
 
 
