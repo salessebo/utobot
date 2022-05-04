@@ -40,6 +40,8 @@ def hello():
         prv = request.form.get('prov')
         res = f'Received {prv} data from {url}...'
         print(res)
+        data_html = request.form.get('data_html')
+        print(data_html)
         if 'throne' in url:
             data_html = request.form.get('data_html')
             print(data_html)
