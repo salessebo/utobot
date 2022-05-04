@@ -42,6 +42,7 @@ def hello():
         print(res)
         if 'throne' in url:
             data_html = request.form.get('data_html')
+            print(data_html)
             nko = parse_throne(data_html)
             print(nko)
         return nko
