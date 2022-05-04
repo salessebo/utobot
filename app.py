@@ -13,8 +13,8 @@ def parse_throne(html_data):
 #         html_data = throne_html.read()
     table_data = pd.read_html(html_data)
     print(table_data)
-    df1 = table_data[1][[0,1]]
-    df2 = table_data[1][[2,3]]
+    df1 = table_data[0][[0,1]]
+    df2 = table_data[0][[2,3]]
     df2.columns= [0,1]
     throne_data = pd.concat([df1,df2], ignore_index=True).set_index(0)[1]
     
