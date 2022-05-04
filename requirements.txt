@@ -1,4 +1,4 @@
 flask
 pandas
 lxml
-bs4
+beautifulsoup4
