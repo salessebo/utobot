@@ -12,6 +12,7 @@ def parse_throne(html_data):
 #     with open("throne_html.txt", "r") as throne_html:
 #         html_data = throne_html.read()
     table_data = pd.read_html(html_data)
+    print(table_data)
     df1 = table_data[1][[0,1]]
     df2 = table_data[1][[2,3]]
     df2.columns= [0,1]
@@ -42,6 +43,7 @@ def hello():
         if 'throne' in url:
             data_html = request.form.get('data_html')
             nko = parse_throne(data_html)
+            print(nko)
         return nko
 
     
