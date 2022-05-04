@@ -23,7 +23,7 @@ def parse_throne(html_data):
 
     
     
-nko = {'response':'success!'}
+nko = {}
 
 
 
