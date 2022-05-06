@@ -3,11 +3,11 @@ from flask import Flask, request
 from datetime import datetime
 import pandas as pd
 from bs4 import BeautifulSoup
-from parser import Parser
+from dataparser import Parser
 
     
-    
-nko = {}
+
+provinces = {}
 
 parser = Parser
 
@@ -15,23 +15,25 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
-    global nko
+    global provinces
     if request.method == "POST":
         url = request.form.get('url')
         prv = request.form.get('prov')
         res = f'Received {prv} data from {url}...'
         print(res)
+        
+        if prv not in provinces.keys():
+            provinces[prv] = {}
+        
         data_html = request.form.get('data_html')
-        print(data_html)
         if 'throne' in url:
             data_html = request.form.get('data_html')
-            nko.update(parser.throne(data_html))
-            print(nko)
-        return nko
+            provinces[prv].update(parse.throne(data_html))
+            print(provinces[prv])
+        return provinces[prv]
 
-    
     if request.method == 'GET':
-        return nko
+        return provinces
 
 
 if __name__ == "__main__":
