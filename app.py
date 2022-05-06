@@ -20,16 +20,24 @@ def hello():
         url = request.form.get('url')
         prv = request.form.get('prov')
         res = f'Received {prv} data from {url}...'
+        data_html = request.form.get('data_html')
         print(res)
         
         if prv not in provinces.keys():
             provinces[prv] = {}
         
-        data_html = request.form.get('data_html')
+       
         if 'throne' in url:
             data_html = request.form.get('data_html')
             provinces[prv].update(parser.throne(data_html))
             print(provinces[prv])
+    
+        if 'build' in url:
+            data_html = request.form.get('data_html')
+            provinces[prv].update(parser.build(data_html))
+            print(provinces[prv])
+            
+      
         return provinces[prv]
 
     if request.method == 'GET':
