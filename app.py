@@ -16,9 +16,19 @@ def parse_throne(html_data):
     throne_data = pd.concat([df1,df2], ignore_index=True).set_index(0)[1]
     
     soup = BeautifulSoup(html_data, 'lxml')
-    throne_data['Message'] = [x.get_text() for x in soup.find_all("p", {"class": "advice-message"})]
     spells = [x.get_text(strip=True) for x in soup.find_all("p") if x.get_text(strip=True).startswith('Spell')][0].split(':')[1]
-    throne_data['Spells'] = [x.split('(') for x in spells.split(')')][:-1]
+    spells = [x.split('(') for x in spells.split(')')][:-1]
+    throne_data['Spells'] = {x: y.split()[0] for x,y in spells}
+    throne_data['Networth'] = throne_data['Networth'].split()[0].replace(',','')
+    throne_data['Building Eff.'] = throne_data['Building Eff.'].replace('%','')
+    throne_data['Stealth'] = throne_data['Thieves'].split()[1].replace('%','').replace('(','').replace(')','')
+    throne_data['Mana'] =  throne_data['Wizards'].split()[1].replace('%','').replace('(','').replace(')','')
+    throne_data['Thieves'] = throne_data['Thieves'].split()[0].replace(',','')
+    throne_data['Wizards'] = throne_data['Wizards'].split()[0].replace(',','')
+    personalities = {'Hero':'War Hero'}
+    throne_data['Personality'] = [personalities[x] for x in personalities if x in throne_data['Ruler']][0]
+    honor_ranks = {'Noble': 'Lord', 'Lord':'Lord', 'Baron':'Baron'}
+    throne_data['Honor'] = [honor_ranks[x] for x in honor_ranks if x in throne_data['Ruler']][0]
     return throne_data.to_dict()
 
     
@@ -41,7 +51,7 @@ def hello():
         print(data_html)
         if 'throne' in url:
             data_html = request.form.get('data_html')
-            nko = parse_throne(data_html)
+            nko.update(parse_throne(data_html))
             print(nko)
         return nko
 
