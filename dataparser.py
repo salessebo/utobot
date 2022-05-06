@@ -7,7 +7,6 @@ class Parser():
     
     def throne(html_data):
         table_data = pd.read_html(html_data)
-        print(table_data)
         df1 = table_data[0][[0,1]]
         df2 = table_data[0][[2,3]]
         df2.columns= [0,1]
@@ -42,6 +41,7 @@ class Parser():
         throne_data['Prisoners'] = int(throne_data['Prisoners'])
         throne_data['Off. Points'] = int(throne_data['Off. Points'])
         throne_data['Def. Points'] = int(throne_data['Def. Points'])
+        
         return throne_data.to_dict()
 
 
@@ -59,11 +59,9 @@ class Parser():
         df2.columns= ['Building', 'You Own', 'In Progress']
         buildings = pd.concat([df0,df1,df2], ignore_index=True).set_index('Building').dropna().astype('int32')    
         buildings['You Own+'] = buildings['You Own'] + buildings['In Progress']
-        buildings['Percent'] = round(100*(buildings['You Own'] + buildings['In Progress']) / buildings[['You Own', 'In Progress']].sum().sum(),1)
-        buildings['Percent+'] = round(100*buildings['You Own+'] / buildings['You Own+'].sum(),1).dropna()   
+        buildings['Percent'] = round(100*buildings['You Own'] / buildings['You Own+'].sum(),1)
+        buildings['Percent+'] = round(100*buildings['You Own+'] / buildings['You Own+'].sum(),1).dropna() 
         buildings = buildings.loc[~(buildings==0).all(axis=1)].T.to_dict()
-
-
 
         return {'buildings':buildings, 'construction':construction}
 
