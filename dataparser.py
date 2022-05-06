@@ -47,7 +47,13 @@ class Parser():
 
     def build(data_html):
         table_data = pd.read_html(data_html)
-        df0 = pd.DataFrame([{'Building': 'Barren', 'You Own': int(df[1].iloc[1][1].split()[0]), 'In Progress': 0}])
+        
+        construction = {}
+        construction['Construction Time'] = int(table_data[0].iloc[2][1].split()[0])
+        construction['Construction Cost'] = int(table_data[0].iloc[0][3].split('gc')[0])
+        construction['Raze Cost'] = int(table_data[0].iloc[2][3].split('gc')[0])
+        
+        df0 = pd.DataFrame([{'Building': 'Barren', 'You Own': int(table_data[0].iloc[1][1].split()[0]), 'In Progress': 0}])
         df1 = table_data[1][['Building', 'You Own', 'In Progress']]
         df2 = table_data[1][['Building.1', 'You Own.1', 'In Progress.1']]
         df2.columns= ['Building', 'You Own', 'In Progress']
@@ -58,10 +64,6 @@ class Parser():
         buildings = buildings.loc[~(buildings==0).all(axis=1)].T.to_dict()
 
 
-        construction = {}
-        construction['Construction Time'] = int(table_data[0].iloc[2][1].split()[0])
-        construction['Construction Cost'] = int(table_data[0].iloc[0][3].split('gc')[0])
-        construction['Raze Cost'] = int(table_data[0].iloc[2][3].split('gc')[0])
 
         return {'buildings':buildings, 'construction':construction}
 
