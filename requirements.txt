@@ -1,3 +1,4 @@
 flask
 pandas
 lxml
+bs4
