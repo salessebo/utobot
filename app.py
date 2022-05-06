@@ -28,7 +28,7 @@ def hello():
         data_html = request.form.get('data_html')
         if 'throne' in url:
             data_html = request.form.get('data_html')
-            provinces[prv].update(parse.throne(data_html))
+            provinces[prv].update(parser.throne(data_html))
             print(provinces[prv])
         return provinces[prv]
 
