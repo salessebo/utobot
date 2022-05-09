@@ -36,6 +36,11 @@ def hello():
             data_html = request.form.get('data_html')
             provinces[prv].update(parser.build(data_html))
             print(provinces[prv])
+                
+        if 'science' in url:
+            data_html = request.form.get('data_html')
+            provinces[prv].update(parser.science(data_html))
+            print(provinces[prv])
             
       
         return provinces[prv]
