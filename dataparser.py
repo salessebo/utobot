@@ -81,7 +81,6 @@ class Parser():
         summary_df['Stacked'] = scientists_df.str.split('-').str[2].str.split().str[0].str.replace(',','').astype(int)
         total = pd.DataFrame([{'Category':'Total', 'Scientists':summary_df['Scientists'].sum(), 'Books':effects_df.sum()[0].astype(int), 'Stacked':summary_df['Stacked'].sum()}])
         summary_df = pd.concat([summary_df,total]).set_index('Category')
-        summary_df.to_dict()
 
-        return {'Sciences':effects_df.to_dict(), 'Scientists':summary_df.to_dict()}
+        return {'Sciences':effects_df.T.to_dict(), 'Scientists':summary_df.T.to_dict()}
 
