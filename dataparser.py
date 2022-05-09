@@ -65,7 +65,7 @@ class Parser():
 
         return {'buildings':buildings, 'construction':construction}
 
-    def sciences(data_html):
+    def science(data_html):
         df = pd.read_html(data_html)
         effects_df = df[1].drop(labels=[0,7,14], axis=0).set_index('Science Type')[['Number of books','Effect']]
         effects_df['Effect'] = effects_df['Effect'].str.split('%').str[0].str[1:].astype(float)
