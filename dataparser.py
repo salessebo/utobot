@@ -65,3 +65,23 @@ class Parser():
 
         return {'buildings':buildings, 'construction':construction}
 
+    def sciences(data_html):
+        df = pd.read_html(data_html)
+        effects_df = df[1].drop(labels=[0,7,14], axis=0).set_index('Science Type')[['Number of books','Effect']]
+        effects_df['Effect'] = effects_df['Effect'].str.split('%').str[0].str[1:].astype(float)
+        effects_df['Number of books'] = effects_df['Number of books'].astype(int)
+        economy = ['Alchemy','Tools','Housing','Production','Bookkeeping','Artisan']
+        military = ['Strategy','Siege','Tactics','Valor','Heroism','Resilience']
+        arcane = ['Crime','Channeling','Shielding','Cunning','Invocation']
+        scientists_df = df[1].iloc[[0,7,14]]['Effect']
+        summary_df = pd.DataFrame()
+        summary_df['Category'] = scientists_df.str.split('-').str[0]
+        summary_df['Scientists'] = scientists_df.str.split('-').str[1].str.split().str[0].astype(int)
+        summary_df['Books'] = [effects_df.loc[economy].sum()[0].astype(int),effects_df.loc[military].sum()[0].astype(int), effects_df.loc[arcane].sum()[0].astype(int)]
+        summary_df['Stacked'] = scientists_df.str.split('-').str[2].str.split().str[0].str.replace(',','').astype(int)
+        total = pd.DataFrame([{'Category':'Total', 'Scientists':summary_df['Scientists'].sum(), 'Books':effects_df.sum()[0].astype(int), 'Stacked':summary_df['Stacked'].sum()}])
+        summary_df = pd.concat([summary_df,total]).set_index('Category')
+        summary_df.to_dict()
+
+        return {'Sciences':effects_df.to_dict(), 'Scientists':summary_df.to_dict()}
+
