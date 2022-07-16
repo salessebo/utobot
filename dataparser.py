@@ -22,7 +22,8 @@ class Parser():
         throne_data['Mana'] =  int(throne_data['Wizards'].split()[1].replace('%','').replace('(','').replace(')',''))
         throne_data['Thieves'] = int(throne_data['Thieves'].split()[0].replace(',',''))
         throne_data['Wizards'] = int(throne_data['Wizards'].split()[0].replace(',',''))
-        personalities = {'Hero':'War Hero'}
+        personalities = {'Hero':'War Hero',
+                        'Rogue':'Rogue'}
         throne_data['Personality'] = [personalities[x] for x in personalities if x in throne_data['Ruler']][0]
         honor_ranks = {'Noble': 'Lord', 'Lord':'Lord', 'Baron':'Baron'}
         throne_data['Honor'] = [honor_ranks[x] for x in honor_ranks if x in throne_data['Ruler']][0]
